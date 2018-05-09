@@ -151,7 +151,7 @@ gba="../../../.."
 
 #export LANG="fr_FR.ISO-8859"
 
-export PATH=$PATH:/home/jeremy/Android/Sdk/tools/bin:/home/jeremy/bin:/home/jeremy/go/bin
+export PATH=$PATH:/home/jeremy/Android/Sdk/tools/bin:/home/jeremy/bin:/home/jeremy/go/bin:/home/jeremy/Perso/Git/home/bin
 export LESSCHARSET=utf-8
 source <(awless completion bash)
 
