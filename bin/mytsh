@@ -1,0 +1,5 @@
+#!/bin/bash
+
+client=$1
+
+tsh --user jeremy.nancel --proxy $client.teleport.fr.clara.net -l admin "${@:2}"
