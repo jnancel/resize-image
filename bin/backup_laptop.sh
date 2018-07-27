@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rsync -avp --exclude-from=/home/jeremy/rsync_exclude_files /home/jeremy/* silver-ext:/var/services/homes/jeremy/CloudStation/Taf/Claranet/
+rsync -avp --delete --exclude-from=/home/jeremy/Perso/rsync_exclude_files /home/jeremy/* silver-ext:/var/services/homes/jeremy/CloudStation/Taf/Claranet/
