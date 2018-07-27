@@ -144,10 +144,13 @@ alias ga="git add"
 alias gc="git commit"
 alias gd="git diff"
 alias gp="git push"
+alias gpf="git push --force-with-lease"
 alias gb="git branch"
+alias gl="git log"
+alias glp="git log --pretty=oneline"
 
 # Terraform aliases
-gba="../../../.."
+export gba="../../../.."
 
 #export LANG="fr_FR.ISO-8859"
 
@@ -156,11 +159,11 @@ export LESSCHARSET=utf-8
 source <(awless completion bash)
 
 function _update_ps1() {
+    #PS1="$(~/go/bin/powerline-go -error $? -colorize-hostname -cwd-max-depth 6 -mode compatible)"
     PS1="$(~/go/bin/powerline-go -error $? -colorize-hostname -cwd-max-depth 6)"
 }
 
 if [ "$TERM" != "linux" ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
-
 
