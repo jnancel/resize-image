@@ -2,4 +2,27 @@
 
 client=$1
 
-tsh --user jeremy.nancel --proxy $client.teleport.fr.clara.net -l admin "${@:2}"
+conf_file="$HOME/.mytsh"
+
+proxy_addr="$client.teleport.fr.clara.net"
+
+default_tsh_port="3023"
+
+user=$(crudini --get ~/.mytsh $client user)
+web_port=$(crudini --get ~/.mytsh $client web_port)
+tsh_port=$(crudini --get ~/.mytsh $client tsh_port)
+login=$(crudini --get ~/.mytsh $client login)
+version=$(crudini --get ~/.mytsh $client version)
+
+proxy_addr=$(crudini --get ~/.mytsh $client proxy_addr > /dev/null 2>&1 || echo $proxy_addr)
+
+switch_teleport_version.sh $version
+
+if [ $tsh_port != $default_tsh_port ]
+then
+  port="$web_port,$tsh_port"
+else
+  port="$web_port"
+fi
+
+tsh --user $user --proxy $proxy_addr:$port -l $login "${@:2}"
