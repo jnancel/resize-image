@@ -125,10 +125,12 @@ export GOPATH="/home/jeremy/go"
 export SHELL="/bin/bash"
 
 # Useful
-alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+#alias myip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias myip="curl https://ipinfo.io/ip"
 
 # Gros doigts
 alias grpe="grep"
+alias grepe="grep"
 alias vmi="vim"
 alias ivm="vim"
 alias shs="ssh"
@@ -136,31 +138,50 @@ alias pign="ping"
 alias bim="vim"
 alias im="vim"
 alias tailf="tail -f"
+alias vp="cp"
+alias vm="vim"
 
 # Git aliases
 alias gs="git status"
+alias gst="git stash"
+alias gstp="git stash pop"
 alias gco="git checkout"
 alias ga="git add"
 alias gc="git commit"
 alias gd="git diff"
 alias gp="git push"
+alias gpu="git pull"
 alias gpf="git push --force-with-lease"
 alias gb="git branch"
 alias gl="git log"
 alias glp="git log --pretty=oneline"
+alias gcam="ga -A; gc -a -m"
+alias store_creds="git config credential.helper store"
+alias onevpn="/usr/bin/openfortivpn -c /etc/openfortivpn/onevpn-config"
+alias sudo="sudo "
 
 # Terraform aliases
-export gba="../../../.."
+alias gba="../../../../"
+#export gba="../../../../"
+#alias awsauth="echo jeremy.nancel@fr.clara.net | aws-adfs login --adfs-host=sso.eu.clara.net --ssl-verification --session-duration 14400 --role-arn='arn:aws:iam::612688033368:role/AWS.CustomerAdmins'"
+alias awsauth="aws-adfs login --adfs-host=sso.eu.clara.net --ssl-verification --session-duration 14400 --role-arn='arn:aws:iam::612688033368:role/AWS.CustomerAdmins'"
+alias tfclean="egrep --color=never '\[33m|\[31m|\[32m|^$| #' | cat -s"
+
+# Vault aliases
+alias vault-login='vault login -method=oidc -path=auth0-oidc -address=https://vault.fr.clara.net'
+export VAULT_ADDR="https://vault.fr.clara.net"
+
+source ~/.nexity-ssm
 
 #export LANG="fr_FR.ISO-8859"
 
-export PATH=$PATH:/home/jeremy/Android/Sdk/tools/bin:/home/jeremy/bin:/home/jeremy/go/bin:/home/jeremy/Perso/Git/home/bin
+export PATH=/home/jeremy/.local/bin:/home/jeremy/.tgenv/bin:/home/jeremy/.tfenv/bin:$PATH:/home/jeremy/Android/Sdk/tools/bin:/home/jeremy/bin:/usr/local/go/bin:/home/jeremy/Perso/Git/home/bin:/home/jeremy/go/bin:/home/jeremy/.pulumi/bin
 export LESSCHARSET=utf-8
 source <(awless completion bash)
 
 function _update_ps1() {
-    #PS1="$(~/go/bin/powerline-go -error $? -colorize-hostname -cwd-max-depth 6 -mode compatible)"
-    PS1="$(~/go/bin/powerline-go -error $? -colorize-hostname -cwd-max-depth 6)"
+    #PS1="$(/usr/local/go/bin/powerline-go -error $? -colorize-hostname -cwd-max-depth 6 -mode compatible)"
+    PS1="$(/home/jeremy/go/bin/powerline-go -error $? -colorize-hostname -cwd-max-depth 6)"
 }
 
 if [ "$TERM" != "linux" ]; then
@@ -168,3 +189,16 @@ if [ "$TERM" != "linux" ]; then
 fi
 
 export EDITOR=vim
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /tmp/node/node_modules/tabtab/.completions/serverless.bash ] && . /tmp/node/node_modules/tabtab/.completions/serverless.bash
+
+complete -C '/usr/local/bin/aws_completer' aws
+
+complete -C /home/jeremy/Vault/versions/0.11.4/vault vault
+
+# Promod
+# k8S
+#alias kubectlpromodint="kubectl --kubeconfig ~/.kube/config-promod-int"
+#alias kubectlpromodpreprod="kubectl --kubeconfig ~/.kube/config-promod-preprod"
