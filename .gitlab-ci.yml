@@ -1,0 +1,25 @@
+# Based on the fact that I have a gitlab-runner with docker executor to pick my jobs
+
+image: <myregistry>/terraform-deploy => image previously built with all the necessary dependencies to run the pipelines : aws-cli, docker, terraform and checkov
+
+variables:
+  GIT_SUBMODULE_STRATEGY: normal
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: '/certs' => need proper configuration on the gitlab runner to work
+
+#
+# Deploy Terraform
+# 
+
+deploy-tf:
+  script:
+    - checkov -d .
+    - mv locals.tf.$CI_COMMIT_REF_NAME locals.tf
+    - terraform init && terraform plan
+    - terraform apply -auto-approve
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "main"'
+      when: manual
+    - if: '$CI_COMMIT_REF_NAME == "dev" || $CI_COMMIT_REF_NAME == "preprod"'
+      when: always
+    - when: never

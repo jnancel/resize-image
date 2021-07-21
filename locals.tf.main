@@ -5,7 +5,8 @@ locals {
   bucket_name = "s3-aircall-resize-destination"
 
   tags = {
-    owner   = "jeremy@nancel.net"
-    company = "aircall"
+    owner       = "jeremy@nancel.net"
+    company     = "aircall"
+    environment = "prod"
   }
 }

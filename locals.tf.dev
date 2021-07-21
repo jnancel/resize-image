@@ -1,0 +1,12 @@
+locals {
+  domain_name = "aircall.com"
+  subdomain   = "resize-dev"
+
+  bucket_name = "s3-aircall-resize-destination-dev"
+
+  tags = {
+    owner       = "jeremy@nancel.net"
+    company     = "aircall"
+    environment = "dev"
+  }
+}
