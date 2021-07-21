@@ -29,7 +29,6 @@ plan-tf:
 deploy-tf:
   stage: deploy
   script:
-    - checkov -d .
     - mv locals.tf.$CI_COMMIT_REF_NAME locals.tf
     - terraform init && terraform apply -auto-approve
   rules:
