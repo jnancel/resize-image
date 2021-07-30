@@ -2,7 +2,7 @@
 
 repos=(~/Git ~/Clients)
 
-author="jeremy.nancel@fr.clara.net"
+author="jeremy@nancel.net"
 period="1 week"
 
 usage() {
